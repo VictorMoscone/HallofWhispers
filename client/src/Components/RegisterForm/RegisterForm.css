@@ -1,11 +1,11 @@
 .page_container {
   margin: 0;
   padding: 0;
-  padding-top: 18vh;
+  padding-top: 15vh;
   padding-bottom: 5vh;
   height: 100%;
   /* background: #bdc3c7 !important; */
-  min-height: 100vh;
+  min-height: 90vh;
 }
 .user_card {
   height: auto;
@@ -75,6 +75,10 @@
 }
 .links {
   margin-top: 8px;
+}
+
+.cursor {
+  cursor: pointer;
 }
 
 /* below for show password checkbox */

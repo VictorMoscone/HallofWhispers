@@ -93,7 +93,7 @@ function App() {
       <Wrapper>
         <AccountContext.Provider value={{ userData, setUserData }}>
           <Nav>
-            <button className="btn btn-dark zero-box beautify-text" onClick={onClick} hidden={!userData.account}><i className="fa fa-sign-out"></i> LOGOUT</button>
+            <li className="nav-item nav-link link-font beautify-text cursor" onClick={onClick} hidden={!userData.account}><i className="fa fa-sign-out"></i> Logout</li>
           </Nav>
           <Router>
             <Switch>

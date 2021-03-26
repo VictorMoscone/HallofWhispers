@@ -127,6 +127,7 @@ module.exports = {
         }),
       );
     } catch (err) {
+      alert(err.message);
       res.send(err);
     };
   },

@@ -1,5 +1,5 @@
 .my-account {
-  background-color: rgb(173, 231, 173);
+  /* background-color: rgb(173, 231, 173); */
   text-align: right;
 }
 
@@ -15,5 +15,3 @@
   font-size: x-small;
   font-style: italic;
 }
-
-/* Add Right and Left justifications */

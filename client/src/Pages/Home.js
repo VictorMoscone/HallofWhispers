@@ -9,7 +9,7 @@ import { PostList, PostListItem } from "../Components/PostList/PostList";
 import "./Home.css";
 import axios from "axios";
 // --- For authentication, allows you to stay logged in --- //
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import AccountContext from "../Context/AccountContext";
 import React, { useState, useEffect, useContext, useRef } from "react";
 import Dice from "react-dice-roll";
@@ -26,7 +26,9 @@ const Home = () => {
   const [messages, setMessages] = useState("");
   const [arr, setArr] = useState([]);
   const [id, setId] = useState("");
+  const history = useHistory();
   const { userData } = useContext(AccountContext);
+
 
   // handles the input change for posting a message to the postboard
   const handleInputChange = (e) => {
@@ -44,7 +46,7 @@ const Home = () => {
     axios
       .post(
         "/api/posts",
-        { message: postMessage, chrName: userData.character.chrName },
+        { message: postMessage, chrName: userData.character?.chrName },
         { headers: { "x-auth-token": token } }
       )
       .then((res) => {
@@ -130,18 +132,20 @@ const Home = () => {
     setMessages("");
   };
 
- 
   const messagesEndRef = useRef(null);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "auto", block: "end", inline: "nearest"});
+    messagesEndRef.current?.scrollIntoView({ behavior: "auto", block: "end", inline: "nearest" });
     // console.log(messagesEndRef)
-    
+
   };
 
   useEffect(() => {
     scrollToBottom();
-  });
+    if (!userData.pending && !userData.account) history.push("/login");
+    //if (!userData.account?.charCreated) history.push("/character");
+    //checkLoggedIn();
+  }, [userData.pending, userData.account, history]);
 
   //--------------------------------------------
   //Activate this block of code when appropriate
@@ -160,121 +164,105 @@ const Home = () => {
 
   //--------------------------------------------
   return (
-    <div style={{ backgroundImage: `url(${background})` }}>
+    <div className="page-container">
       <Wrapper>
-        <Container>
-          <Row>
-            <Col size="md-6">
-              <h5 style={{ textShadow: "4px 4px 8px black" }}>
-                {userData.character?.chrName}
-              </h5>
-              <strong style={{ textShadow: "4px 4px 8px red" }}>
-                {`The ${userData.character?.chrRace}`}
-              </strong>
-              <strong style={{ textShadow: "4px 4px 8px red" }}>
-                {` ${userData.character?.chrClass}`}
-              </strong>
-              <br />
-              <strong style={{ textShadow: "4px 4px 8px red" }}>Race: </strong>
-            </Col>
-          </Row>
-          <Row>
-            <Col size="md-4">
-              <StatCard />
-            </Col>
-            <Col size="md-4">
-              <Row>
-                <form onSubmit={handleSubmit}>
-                  <div>
-                    <textarea
-                      onChange={handleInputChange}
+        <div className="container container-container">
+          <div className="container margin-top">
+            <Row>
+              <Col size="md-12">
+                <h5 className="user-font">
+                  {userData.character?.chrName}
+                </h5>
+                <div className="last">
+                  <strong className="subheading">
+                    {`The ${userData.character?.chrRace}`}
+                  </strong>
+                  <strong className="subheading">
+                    {` ${userData.character?.chrClass}`}
+                  </strong>
+                </div>
+              </Col>
+            </Row>
+            <Row>
+              <Col size="md-4">
+                <StatCard />
+              </Col>
+              <Col size="md-4">
+                <Row>
+                  <h4 className="margin-between-form">Adventure Postings</h4>
+                  <form onSubmit={handleSubmit}>
+                      <textarea onChange={handleInputChange} type="text" name="message" value={postMessage} className="form-control" placeholder="Post your adventures here!" aria-label="post-message" aria-describedby="button-addon2" id="myInput"/>
+                      <button className="btn btn-success" type="submit" id="button-addon2">Post</button>
+                  </form>
+                </Row>
+                <Row>
+                  <Card>
+                    <PostList>
+                      {posts.map((post, index) => {
+                        return (
+                          <PostListItem
+                            // style={{border: "0"}}
+                            key={index}
+                            date={post.date}
+                            accountId={post.accountId}
+                            chrName={post.chrName}
+                            message={post.message}
+                            myAccount={
+                              post.accountId === userData.account?.id
+                                ? "true"
+                                : "false"
+                            }
+                          />
+                        );
+                      })}
+                    </PostList>
+                  </Card>
+                </Row>
+              </Col>
+              <Col size="md-4">
+                <div>
+                  <h4 className="margin-between-form">Whispers in the Hall</h4>
+                  <Card>
+                    {/* <p className="text-center">Current Whispers in the Hall</p> */}
+                    <div ref={messagesEndRef}>
+                      {/* {console.log(arr)} */}
+                      {arr.map((chat, index) => (
+                        <div key={index}>
+                          <p>{chat.message}</p>
+                          <p style={{ float: "right" }} className="timestamp">
+                            {" "}
+                            {chat.displayName} sent at:{" "}
+                            {moment(chat.date).format("h:mm a")}
+                          </p>
+                          <br />
+                        </div>
+                      ))}
+                    </div>
+                  </Card>
+                  <div className="d-flex">
+                    <input
                       type="text"
-                      style={{ marginTop: "10px" }}
-                      name="message"
-                      value={postMessage}
                       className="form-control"
-                      placeholder="Enter your post here"
-                      aria-label="post-message"
-                      aria-describedby="button-addon2"
-                      id="myInput"
+                      placeholder="Enter your message here"
+                      value={messages}
+                      onChange={(e) => {
+                        setMessages(e.target.value);
+                      }}
                     />
                     <button
-                      className="btn btn-success"
-                      type="submit"
-                      id="button-addon2"
+                      className="btn btn-primary"
+                      onClick={(e) => sendMessage(e)}
                     >
-                      Post
-                    </button>
-                  </div>
-                </form>
-              </Row>
-              <Row>
-                <Card>
-
-                  <PostList>
-                    {posts.map((post, index) => {
-                      return (
-                        <PostListItem
-                          // style={{border: "0"}}
-                          key={index}
-                          date={post.date}
-                          accountId={post.accountId}
-                          chrName={post.chrName}
-                          message={post.message}
-                          myAccount={
-                            post.accountId === userData.account?.id
-                              ? "true"
-                              : "false"
-                          }
-                        />
-                      );
-                    })}
-                  </PostList>
-                </Card>
-              </Row>
-            </Col>
-            <Col size="md-4">
-              <div>
-                <Card>
-                  <p className="text-center">{welcome}</p>
-                  <div ref={messagesEndRef}>
-                    {/* {console.log(arr)} */}
-                    {arr.map((chat, index) => (
-                      <div key={index}>
-                        <p>{chat.message}</p>
-                        <p style={{ float: "right" }} className="timestamp">
-                          {" "}
-                          {chat.displayName} sent at:{" "}
-                          {moment(chat.date).format("h:mm a")}
-                        </p>
-                        <br />
-                      </div>
-                    ))}
-                  </div>
-                </Card>
-                <div className="d-flex">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Enter your message here"
-                    value={messages}
-                    onChange={(e) => {
-                      setMessages(e.target.value);
-                    }}
-                  />
-                  <button
-                    className="btn btn-primary"
-                    onClick={(e) => sendMessage(e)}
-                  >
-                    send
+                      send
                   </button>
+                  </div>
                 </div>
-              </div>
-              <br />
-              <Dice onRoll={(value) => console.log(value)} size={50} />
-            </Col>
-          </Row>
-        </Container>
+                <br />
+                <Dice onRoll={(value) => console.log(value)} size={50} />
+              </Col>
+            </Row>
+          </div>
+        </div>
       </Wrapper>
     </div>
   );

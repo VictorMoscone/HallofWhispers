@@ -45,7 +45,7 @@ const LoginForm = (props) => {
         //If user is already loggedin and the user wanted to access login
         //send them to the Home page.  If a character is not created, Home 
         //will send them back to the character page
-        if (userData.account) history.push("/");
+        if (userData.account && userData.account.charCreated) history.push("/");
     }, [userData.account, history])
 
     //-----------------------------------------------
@@ -63,7 +63,7 @@ const LoginForm = (props) => {
 
     return (
         <>
-             {/* form start */}
+            {/* form start */}
             < form onSubmit={submitLoginForm} >
                 {/* email start */}
                 <div className="input-group mb-3">
@@ -73,7 +73,7 @@ const LoginForm = (props) => {
                     <input onChange={onChange} type="text" name="email" className="form-control input_user" placeholder="email" />
                 </div>
                 {/* email end */}
-                
+
                 {/* password start */}
                 <div className="input-group mb-2">
                     <div className="input-group-append">
@@ -98,7 +98,7 @@ const LoginForm = (props) => {
                 </div>
                 {/* button end */}
 
-                <a onClick={props.toggleForm} className="d-flex justify-content-center mt-3">
+                <a onClick={props.toggleForm} className="d-flex justify-content-center mt-3 cursor">
                     {props.formMode === "login" ? "Sign up here" : "Login here"}
                 </a>
             </form >

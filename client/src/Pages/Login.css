@@ -15,15 +15,15 @@
 
                 other color palettes at https://www.color-hex.com/color/c0392b
             */
-.page_container {
+/* .page_container {
   margin: 0;
   padding: 0;
   padding-top: 18vh;
   padding-bottom: 5vh;
   height: 100%;
   background: url(../assets/images/vintage-concrete.png);
-  min-height: 100vh;
-}
+  min-height: 90vh;
+} */
 .user_card {
   height: 400px;
   width: 350px;

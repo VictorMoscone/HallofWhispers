@@ -1,9 +1,32 @@
 .page-container {
   background: url(../assets/images/vintage-concrete.png);
 }
-h5 {
-  color: red;
+
+.margin-top {
+  margin-top: 2em;
 }
+h5.user-font {
+  font-weight: 700;
+  font-family: "Trebuchet MS", sans-serif;
+  font-size: 3em;
+  letter-spacing: -2px;
+  border-bottom: 2px solid black;
+  text-transform: uppercase;
+}
+
+strong.subheading {
+  opacity: 0.75;
+  font-size: 1.3em;
+}
+
+.last {
+  margin-bottom: 2em;
+}
+
+.margin-between-form {
+  margin-bottom: 36px;
+}
+
 button {
   float: right;
   margin-top: 5px;
@@ -12,6 +35,9 @@ button {
   margin: 0;
   padding: 0;
   height: 100%;
-  min-height: 100vh;
+  min-height: 90vh;
 }
 
+.container-container {
+  min-height: 90vh;
+}

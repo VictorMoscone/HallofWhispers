@@ -12,7 +12,7 @@ const Nav = ({ children }) => {
     <nav className="navbar navbar-expand-lg navbar-light background">
       {/* <div className="container-fluid background"> */}
         <img className="nav-logo" src="https://i.imgur.com/BGhAyqD.png" alt="logo"></img>
-        <a className="navbar-brand brand-box-model kerning-ligature" href="/">
+        <a className="navbar-brand brand-box-model kerning-ligature medieval" href="/">
           <span className="letter-big">H</span>all of <span className="letter-big">W</span>hispers
         </a>
         <button
@@ -38,8 +38,6 @@ const Nav = ({ children }) => {
               <i className="fa fa-users"></i> Character
               </a>
             </li>
-          {/* </ul> */}
-          {/* <ul className="navbar-nav mb-2 mb-lg-0"> */}
             <li className="nav-item login">
               <a className="nav-link" href="/login" hidden={userData.account}>
               <i className="fa fa-sign-in icon-beautify"></i> Login
@@ -48,7 +46,7 @@ const Nav = ({ children }) => {
             </li>
           </ul>
         </div>
-      {/* </div> */}
+
     </nav>
   );
 };

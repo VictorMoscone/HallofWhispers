@@ -1,10 +1,11 @@
 @font-face {
-  font-family: "MedievalSharp";
-  src: local("../assets/fonts/MedievalSharp/MedievalSharp-Regular.ttf") format("ttf");
+  font-family: "Medieval";
+  src: local("../../assets/fonts/AlmendraDisplay/AlmendraDisplay-Regular.ttf") format("ttf");
 }
 
 .background {
   background-color: #bdc3c7;
+  /* background: url("../assets/images/dark_wall.png"); */
 }
 .nav-logo {
   height: 60px;
@@ -12,13 +13,16 @@
   margin-left: 7.5px;
 }
 
-.brand-box-model{
-  padding-left: .68rem;
+.brand-box-model {
+  padding-left: 0.68rem;
   padding-bottom: 0;
 }
 
+a.medieval {
+  font-family: "Medieval" !important;
+}
+
 .kerning-ligature {
-    font-family: "MedievalSharp", "Roboto", sans-serif;
     font-kerning: normal;
     font-weight: 600;
     font-size: 2.1em;
@@ -43,10 +47,8 @@
   margin-right: 5em;
 }
 
-
-
 /* mobile in portrait */
-@media only screen and (max-width : 480px) {
+@media only screen and (max-width: 480px) {
   .nav-logo {
     display: none;
   }
@@ -65,5 +67,5 @@
     /* 1.2 line-height default */
     line-height: 1.5;
     margin-left: 8px;
-    }
   }
+}

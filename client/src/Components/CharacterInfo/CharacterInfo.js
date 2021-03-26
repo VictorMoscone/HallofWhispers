@@ -11,9 +11,10 @@ function CharacterInfo(props) {
 
 
     return (
-        < div className="container-sm">
+        <>
+        < div className="container">
             <form>
-                <div className="form-row row">
+                <div className="form-row">
                     <h3>Who are you?</h3>
                     <div className="col-sm">
                         <label for="validationServer01">Name</label>
@@ -68,7 +69,7 @@ function CharacterInfo(props) {
                             Please select an Alignment.
                             </div> */}
                     </div>
-                    <div className="form-row row">
+                    <div className="form-row">
                         <h3>Your Story</h3>
                         <div className="input-group col-md-3 mb-3">
                             <textarea onChange={handleChange} name="Story" className="form-control" aria-label="With textarea" id="characterstory" defaultValue={userData.character?.chrStory}></textarea>
@@ -77,6 +78,7 @@ function CharacterInfo(props) {
                 </div>
             </form>
         </div>
+        </>
     )
 }
 

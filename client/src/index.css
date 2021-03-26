@@ -1,10 +1,18 @@
 /* custom import */
 @font-face {
-  font-family: "Roboto", "MedievalSharp";
+  font-family: "Roboto", "Medieval";
   src: local("Roboto"),
     url("./assets/fonts/Roboto/Roboto-Regular.woff2") format("woff2"),
     url("./assets/fonts/MedievalSharp/MedievalSharp-Regular.ttf") format("truetype");
     font-weight: normal;
+}
+
+@font-face {
+  font-family: "Medieval";
+  src: local("Medieval")
+  url("./assets/fonts/MedievalSharp/MedievalSharp-Regular.woff2") format("woff2"),
+  url("./assets/fonts/MedievalSharp/MedievalSharp-Regular.ttf") format("truetype");
+  font-weight: normal;
 }
 
 /* 

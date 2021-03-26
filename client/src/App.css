@@ -2,6 +2,9 @@
   margin-top: 1px;
 }
 
+.cursor {
+  cursor: pointer;
+}
 
 @media only screen and (max-width : 480px) {
   .beautify-text {
